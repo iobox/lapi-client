@@ -1,0 +1,31 @@
+{
+  "name": "lapi-client",
+  "version": "1.0.0",
+  "description": "Light API Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/gulp test",
+    "dev": "./node_modules/.bin/gulp watch:test",
+    "deploy": "./node_modules/.bin/gulp deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iobox/lapi-client.git"
+  },
+  "keywords": [
+    "lapi",
+    "client"
+  ],
+  "author": "Long Do <me@dotronglong.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iobox/lapi-client/issues"
+  },
+  "homepage": "https://github.com/iobox/lapi-client#readme",
+  "devDependencies": {
+    "lapi-dev": "^1.0.x"
+  },
+  "dependencies": {
+    "axios": "^0.17.1"
+  }
+}
