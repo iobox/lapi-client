@@ -1,15 +1,16 @@
-import Describer from './describer'
+import Spec from './spec'
+import Requester from './requester'
 
 export default class Client {
-    constructor(describer = {}) {
-        if (describer instanceof Describer) {
-            this.describer = describer
+    constructor(spec = {}) {
+        if (spec instanceof Spec) {
+            this.spec = spec
         } else {
-            this.describer = new Describer(describer)
+            this.spec = new Spec(spec)
         }
     }
 
-    get() {
-        
+    make(name) {
+        return new Requester()
     }
 }
