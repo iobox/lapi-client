@@ -28,20 +28,12 @@ var Spec = function () {
 
     this.data = {
       endpoints: {},
-      authorizations: {},
       environments: {},
-      settings: {
-        env: '',
-        uri: '',
-        auth: ''
-      }
+      settings: {}
     };
 
     if (typeof data['endpoints'] !== 'undefined') {
       this.register('endpoints', data['endpoints']);
-    }
-    if (typeof data['authorizations'] !== 'undefined') {
-      this.register('authorizations', data['authorizations']);
     }
     if (typeof data['environments'] !== 'undefined') {
       this.register('environments', data['environments']);
@@ -64,14 +56,6 @@ var Spec = function () {
         case 'endpoints':
           Object.keys(args[0]).forEach(function (key) {
             return _this.register('endpoint', key, args[0][key]);
-          });
-          break;
-        case 'authorization':
-          this.data.authorizations[args[0]] = args[1];
-          break;
-        case 'authorizations':
-          Object.keys(args[0]).forEach(function (key) {
-            return _this.register('authorization', key, args[0][key]);
           });
           break;
         case 'environment':
@@ -107,15 +91,6 @@ var Spec = function () {
             });
           }
           break;
-        case 'authorization':
-          if (!args.length) {
-            this.data.authorizations = {};
-          } else {
-            args.forEach(function (key) {
-              return delete _this2.data.authorizations[key];
-            });
-          }
-          break;
         case 'environment':
           if (!args.length) {
             this.data.environments = {};
@@ -133,11 +108,6 @@ var Spec = function () {
     key: 'endpoints',
     value: function endpoints() {
       return this.data.endpoints;
-    }
-  }, {
-    key: 'authorizations',
-    value: function authorizations() {
-      return this.data.authorizations;
     }
   }, {
     key: 'environments',
