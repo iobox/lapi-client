@@ -18,7 +18,7 @@ class authBasic {
    */
   authorize(request, parameters) {
     const bearer = (new Buffer(Replacer.replace('{{auth_user}}:{{auth_password}}', parameters))).toString('base64')
-    request.getHeader().set('Authorization', 'Bearer ' + bearer)
+    request.getHeader().set('Authorization', 'Basic ' + bearer)
     return this
   }
 }

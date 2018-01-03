@@ -23,6 +23,6 @@ describe('helper/replacer.js', function () {
       'auth_password': 'dummy'
     })
     expect(request.getHeader().has('Authorization')).to.be.true
-    expect(request.getHeader().get('Authorization')).to.equal('Bearer ' + (new Buffer('john:dummy')).toString('base64'))
+    expect(request.getHeader().get('Authorization')).to.equal('Basic ' + (new Buffer('john:dummy')).toString('base64'))
   })
 })
