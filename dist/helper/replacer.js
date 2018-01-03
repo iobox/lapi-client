@@ -6,39 +6,28 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _spec = require('./spec');
-
-var _spec2 = _interopRequireDefault(_spec);
-
-var _requester = require('./requester');
-
-var _requester2 = _interopRequireDefault(_requester);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Client = function () {
-  function Client() {
-    var spec = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    _classCallCheck(this, Client);
-
-    if (spec instanceof _spec2.default) {
-      this.spec = spec;
-    } else {
-      this.spec = new _spec2.default(spec);
-    }
+var Replacer = function () {
+  function Replacer() {
+    _classCallCheck(this, Replacer);
   }
 
-  _createClass(Client, [{
-    key: 'make',
-    value: function make(name) {
-      return new _requester2.default(this.spec.make(name));
+  _createClass(Replacer, null, [{
+    key: 'replace',
+    value: function replace(source, parameters) {
+      var keys = Object.keys(parameters);
+      if (keys.length > 0) {
+        keys.forEach(function (key) {
+          return source = source.replace('{{' + key + '}}', parameters[key]);
+        });
+      }
+
+      return source;
     }
   }]);
 
-  return Client;
+  return Replacer;
 }();
 
-exports.default = Client;
+exports.default = Replacer;

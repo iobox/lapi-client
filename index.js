@@ -1,7 +1,11 @@
 var $exports = {
+ "Auth": "auth.js",
  "Client": "client.js",
- "Describer": "describer.js",
- "Requestor": "requestor.js"
+ "helper": {
+  "Replacer": "helper/replacer.js"
+ },
+ "Requester": "requester.js",
+ "Spec": "spec.js"
 };
 const distDir = 'dist';
 function include(file, name) {
