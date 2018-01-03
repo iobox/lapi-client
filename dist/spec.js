@@ -40,6 +40,14 @@ var Spec = function () {
     }
   }
 
+  /**
+   * Register an element
+   * @param {string} type
+   * @param {?Array} args
+   * @returns {Spec}
+   */
+
+
   _createClass(Spec, [{
     key: 'register',
     value: function register(type) {
@@ -72,6 +80,13 @@ var Spec = function () {
 
       return this;
     }
+
+    /**
+     * Remove an element by type
+     * @param {string} type
+     * @param {?Array} args
+     */
+
   }, {
     key: 'remove',
     value: function remove(type) {
@@ -104,26 +119,36 @@ var Spec = function () {
           break;
       }
     }
-  }, {
-    key: 'endpoints',
-    value: function endpoints() {
-      return this.data.endpoints;
-    }
-  }, {
-    key: 'environments',
-    value: function environments() {
-      return this.data.environments;
-    }
-  }, {
-    key: 'settings',
-    value: function settings() {
-      return this.data.settings;
-    }
+
+    /**
+     * Set a setting by key-value
+     * @param {string} key
+     * @param {*} value
+     * @returns {Spec}
+     */
+
   }, {
     key: 'set',
-    value: function set(key, value) {
+    value: function set(key) {
+      var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
       this.data.settings[key] = value;
       return this;
+    }
+
+    /**
+     * Get a setting by key
+     * @param {string} key
+     * @param {?*} def
+     * @returns {*}
+     */
+
+  }, {
+    key: 'get',
+    value: function get(key) {
+      var def = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      return typeof this.data.settings[key] !== 'undefined' ? this.data.settings[key] : def;
     }
 
     /**
@@ -135,7 +160,7 @@ var Spec = function () {
   }, {
     key: 'make',
     value: function make(name) {
-      if (typeof this.endpoints()[name] === 'undefined') {
+      if (typeof this.data.endpoints[name] === 'undefined') {
         return new Error('Endpoint "' + name + '" could not be found');
       }
 
@@ -143,16 +168,18 @@ var Spec = function () {
       var auth = void 0,
           parameters = void 0,
           uri = void 0;
-      var endpoint = this.endpoints()[name];
+      var endpoint = this.data.endpoints[name];
       if (typeof endpoint['auth'] !== 'undefined') {
         auth = new _auth2.default(endpoint['auth']);
-      } else if (typeof this.settings()['auth'] !== 'undefined') {
-        auth = new _auth2.default(this.settings()['auth']);
+      } else if (this.get('auth', '') !== '') {
+        auth = new _auth2.default(this.get('auth'));
       } else {
         auth = new _auth2.default();
       }
-      if (typeof this.settings()['env'] !== 'undefined' && typeof this.environments()[this.settings()['env']] !== 'undefined') {
-        parameters = this.environments()[this.settings()['env']];
+
+      var env = this.get('env', '');
+      if (env !== '' && typeof this.data.environments[env] !== 'undefined') {
+        parameters = this.data.environments[env];
       } else {
         parameters = {};
       }
