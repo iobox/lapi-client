@@ -26,6 +26,7 @@
     "lapi-dev": "^1.0.x"
   },
   "dependencies": {
-    "axios": "^0.17.1"
+    "axios": "^0.17.1",
+    "lapi-http": "^1.0.0"
   }
 }

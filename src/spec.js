@@ -1,9 +1,15 @@
+
+const Request = require('lapi-http').Request
 export default class Spec {
     constructor(data = {}) {
         this.data = {
             endpoints: {},
             authorizations: {},
-            environments: {}
+            environments: {},
+            settings: {
+              env: '',
+              uri: ''
+            }
         }
 
         if (typeof data['endpoints'] !== 'undefined') {
@@ -82,5 +88,13 @@ export default class Spec {
 
     environments() {
         return this.data.environments
+    }
+
+    settings() {
+      return this.data.settings
+    }
+
+    make(name) {
+      let request = new Request()
     }
 }

@@ -1,5 +1,6 @@
 import Spec from './spec'
 import Requester from './requester'
+import Request from 'lapi-http'
 
 export default class Client {
     constructor(spec = {}) {
@@ -11,6 +12,6 @@ export default class Client {
     }
 
     make(name) {
-        return new Requester()
+        return new Requester(this.spec.make(name))
     }
 }

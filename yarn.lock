@@ -2118,6 +2118,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
+lapi-common@^1.0.x:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/lapi-common/-/lapi-common-1.0.3.tgz#fd21a212141e29443d6830b8eb8fc423f919673d"
+
 lapi-dev@^1.0.x:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/lapi-dev/-/lapi-dev-1.0.5.tgz#07c642906e19d7d571af03d84f89bc0597d3c2fd"
@@ -2131,6 +2135,12 @@ lapi-dev@^1.0.x:
     gulp-concat "^2.6.0"
     gulp-mocha "^2.2.0"
     gulp-nodemon "^2.1.0"
+
+lapi-http@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/lapi-http/-/lapi-http-1.0.0.tgz#ad392f82848eb3dcf16e2a9d6b484391ad8798da"
+  dependencies:
+    lapi-common "^1.0.x"
 
 latest-version@^3.0.0:
   version "3.1.0"
