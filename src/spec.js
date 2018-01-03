@@ -126,6 +126,8 @@ export default class Spec {
     }
     if (typeof endpoint['uri'] !== 'undefined') {
       uri = endpoint['uri']
+    } else {
+      uri = this.get('uri', '')
     }
     if (typeof endpoint['path'] !== 'undefined') {
       uri += endpoint['path']
