@@ -31,9 +31,9 @@ class authBasic {
 export default class Auth {
   /**
    * Constructor
-   * @param {?string} type
+   * @param {!string} type
    */
-  constructor(type) {
+  constructor(type = Auth.TYPE_NONE) {
     this.type = type
     switch (type) {
       case Auth.TYPE_BASIC:
@@ -55,4 +55,5 @@ export default class Auth {
     return this.adapter.authorize(request, parameters)
   }
 }
+Auth.TYPE_NONE = ''
 Auth.TYPE_BASIC = 'basic'

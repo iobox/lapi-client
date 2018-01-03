@@ -12,12 +12,18 @@ export default class Client {
 
   /**
    * Execute request
-   * @param {!string} name
+   * @param {string} name
    * @param {?function} middleware
-   * @returns {AxiosPromise}
+   * @returns {AxiosPromise|Promise}
    */
   request(name, middleware) {
     let request = this.spec.make(name)
+    if (request instanceof Error) {
+      return new Promise(function(resolve, reject) {
+        reject(request)
+      })
+    }
+
     let options = {}
     if (typeof middleware === 'function') {
       middleware(request, options)

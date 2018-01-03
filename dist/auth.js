@@ -67,9 +67,11 @@ var authBasic = function () {
 var Auth = function () {
   /**
    * Constructor
-   * @param {?string} type
+   * @param {!string} type
    */
-  function Auth(type) {
+  function Auth() {
+    var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Auth.TYPE_NONE;
+
     _classCallCheck(this, Auth);
 
     this.type = type;
@@ -103,4 +105,5 @@ var Auth = function () {
 
 exports.default = Auth;
 
+Auth.TYPE_NONE = '';
 Auth.TYPE_BASIC = 'basic';

@@ -102,12 +102,17 @@ export default class Spec {
     return this
   }
 
+  /**
+   * Make a request
+   * @param {string} name
+   * @returns {Error|Request}
+   */
   make(name) {
-    let request = new Request()
     if (typeof this.endpoints()[name] === 'undefined') {
-      return request
+      return new Error('Endpoint "' + name + '" could not be found')
     }
 
+    let request = new Request()
     let auth, parameters, uri
     const endpoint = this.endpoints()[name]
     if (typeof endpoint['auth'] !== 'undefined') {

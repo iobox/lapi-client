@@ -33,9 +33,9 @@ var Client = function () {
 
   /**
    * Execute request
-   * @param {!string} name
+   * @param {string} name
    * @param {?function} middleware
-   * @returns {AxiosPromise}
+   * @returns {AxiosPromise|Promise}
    */
 
 
@@ -43,6 +43,12 @@ var Client = function () {
     key: 'request',
     value: function request(name, middleware) {
       var request = this.spec.make(name);
+      if (request instanceof Error) {
+        return new Promise(function (resolve, reject) {
+          reject(request);
+        });
+      }
+
       var options = {};
       if (typeof middleware === 'function') {
         middleware(request, options);

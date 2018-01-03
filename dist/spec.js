@@ -155,14 +155,21 @@ var Spec = function () {
       this.data.settings[key] = value;
       return this;
     }
+
+    /**
+     * Make a request
+     * @param {string} name
+     * @returns {Error|Request}
+     */
+
   }, {
     key: 'make',
     value: function make(name) {
-      var request = new _lapiHttp.Request();
       if (typeof this.endpoints()[name] === 'undefined') {
-        return request;
+        return new Error('Endpoint "' + name + '" could not be found');
       }
 
+      var request = new _lapiHttp.Request();
       var auth = void 0,
           parameters = void 0,
           uri = void 0;
