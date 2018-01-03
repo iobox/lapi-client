@@ -1,7 +1,7 @@
 import Replacer from './helper/replacer'
 import {Buffer} from 'safe-buffer'
 
-const Request = require('lapi-http').Request
+import {Request} from 'lapi-http'
 
 class authNone {
   authorize() {
@@ -23,7 +23,16 @@ class authBasic {
   }
 }
 
+/**
+ * Authorization Extension
+ *
+ * Helps to authorize request
+ */
 export default class Auth {
+  /**
+   * Constructor
+   * @param {?string} type
+   */
   constructor(type) {
     this.type = type
     switch (type) {
@@ -36,6 +45,12 @@ export default class Auth {
     }
   }
 
+  /**
+   * Authorize request
+   * @param {Request} request
+   * @param {!Object} parameters
+   * @returns {authBasic}
+   */
   authorize(request, parameters) {
     return this.adapter.authorize(request, parameters)
   }

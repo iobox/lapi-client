@@ -2137,8 +2137,8 @@ lapi-dev@^1.0.x:
     gulp-nodemon "^2.1.0"
 
 lapi-http@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/lapi-http/-/lapi-http-1.0.1.tgz#ae99b5f974dc98c6e383de09d494c61d0a24a1ec"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/lapi-http/-/lapi-http-1.0.2.tgz#b619d358144db1daf31b0cdc18fdb0f867f99936"
   dependencies:
     lapi-common "^1.0.x"
 

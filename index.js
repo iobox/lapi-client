@@ -4,7 +4,6 @@ var $exports = {
  "helper": {
   "Replacer": "helper/replacer.js"
  },
- "Requester": "requester.js",
  "Spec": "spec.js"
 };
 const distDir = 'dist';

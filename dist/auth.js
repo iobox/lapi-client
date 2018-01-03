@@ -12,11 +12,11 @@ var _replacer2 = _interopRequireDefault(_replacer);
 
 var _safeBuffer = require('safe-buffer');
 
+var _lapiHttp = require('lapi-http');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Request = require('lapi-http').Request;
 
 var authNone = function () {
   function authNone() {
@@ -57,7 +57,18 @@ var authBasic = function () {
   return authBasic;
 }();
 
+/**
+ * Authorization Extension
+ *
+ * Helps to authorize request
+ */
+
+
 var Auth = function () {
+  /**
+   * Constructor
+   * @param {?string} type
+   */
   function Auth(type) {
     _classCallCheck(this, Auth);
 
@@ -71,6 +82,14 @@ var Auth = function () {
         break;
     }
   }
+
+  /**
+   * Authorize request
+   * @param {Request} request
+   * @param {!Object} parameters
+   * @returns {authBasic}
+   */
+
 
   _createClass(Auth, [{
     key: 'authorize',

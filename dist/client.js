@@ -10,9 +10,9 @@ var _spec = require('./spec');
 
 var _spec2 = _interopRequireDefault(_spec);
 
-var _requester = require('./requester');
+var _axios = require('axios');
 
-var _requester2 = _interopRequireDefault(_requester);
+var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31,10 +31,28 @@ var Client = function () {
     }
   }
 
+  /**
+   * Execute request
+   * @param {!string} name
+   * @param {?function} middleware
+   * @returns {AxiosPromise}
+   */
+
+
   _createClass(Client, [{
-    key: 'make',
-    value: function make(name) {
-      return new _requester2.default(this.spec.make(name));
+    key: 'request',
+    value: function request(name, middleware) {
+      var request = this.spec.make(name);
+      var options = {};
+      if (typeof middleware === 'function') {
+        middleware(request, options);
+      }
+
+      return (0, _axios2.default)(Object.assign({
+        method: request.getMethod(),
+        url: request.getUri().toString(),
+        headers: request.getHeader().all()
+      }, options));
     }
   }]);
 

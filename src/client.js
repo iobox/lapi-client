@@ -1,5 +1,5 @@
 import Spec from './spec'
-import Requester from './requester'
+import axios from 'axios'
 
 export default class Client {
   constructor(spec = {}) {
@@ -10,7 +10,23 @@ export default class Client {
     }
   }
 
-  make(name) {
-    return new Requester(this.spec.make(name))
+  /**
+   * Execute request
+   * @param {!string} name
+   * @param {?function} middleware
+   * @returns {AxiosPromise}
+   */
+  request(name, middleware) {
+    let request = this.spec.make(name)
+    let options = {}
+    if (typeof middleware === 'function') {
+      middleware(request, options)
+    }
+
+    return axios(Object.assign({
+      method: request.getMethod(),
+      url: request.getUri().toString(),
+      headers: request.getHeader().all()
+    }, options))
   }
 }
