@@ -9,7 +9,8 @@ let $module = {
 const publish = function ($object) {
   Object.keys($object).forEach(function($key) {
     if (typeof $object[$key] === 'string') {
-      $object[$key] = require('./dist/' + $object[$key]);
+      let pkg = require('./dist/' + $object[$key]);
+      $object[$key] = typeof pkg.default !== 'undefined' ? pkg.default : pkg;
     } else if (typeof $object[$key] === 'object') {
       $object[$key] = publish($object[$key])
     }
