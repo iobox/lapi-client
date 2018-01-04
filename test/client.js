@@ -22,6 +22,7 @@ describe('client.js', function () {
         expect(config.timeout).to.equal(1200)
         expect(config.url).to.equal('http://localhost/products')
         expect(config.method).to.equal('post')
+        expect(config.data).to.equal(JSON.stringify({name: 'John'}))
         return new Promise(function(resolve) {
           resolve({
             status: 200,
@@ -32,6 +33,9 @@ describe('client.js', function () {
         })
       }
       options.timeout = 1200
+      request.getBody().setParsedContent({
+        name: 'John'
+      })
     }).then(function (response) {
       expect(response.status).to.equal(200)
       expect(response.data).to.deep.equal({status: true})

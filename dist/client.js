@@ -54,11 +54,15 @@ var Client = function () {
         middleware(request, options);
       }
 
-      return (0, _axios2.default)(Object.assign({
+      var config = Object.assign({
         method: request.getMethod(),
         url: request.getUri().toString(),
         headers: request.getHeader().all()
-      }, options));
+      }, options);
+      if (request.getMethod().toLowerCase() !== 'get') {
+        config.data = request.getBody().getParsedContent();
+      }
+      return (0, _axios2.default)(config);
     }
   }]);
 

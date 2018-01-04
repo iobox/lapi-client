@@ -29,10 +29,14 @@ export default class Client {
       middleware(request, options)
     }
 
-    return axios(Object.assign({
+    let config = Object.assign({
       method: request.getMethod(),
       url: request.getUri().toString(),
       headers: request.getHeader().all()
-    }, options))
+    }, options)
+    if (request.getMethod().toLowerCase() !== 'get') {
+      config.data = request.getBody().getParsedContent()
+    }
+    return axios(config)
   }
 }
