@@ -134,6 +134,9 @@ export default class Spec {
     }
     uri = Replacer.replace(uri, parameters)
     request.setUri(uri)
+    if (typeof endpoint['query'] === 'object') {
+      request.getUri().setQuery(endpoint['query'])
+    }
 
     return request
   }

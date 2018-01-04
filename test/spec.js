@@ -33,6 +33,14 @@ describe('spec.js', function () {
           uri: '{{scheme}}://{{host}}',
           path: '/products',
           method: 'GET'
+        },
+        baz: {
+          uri: '{{scheme}}://{{host}}',
+          path: '/products',
+          method: 'POST',
+          query: {
+            a: 'x'
+          }
         }
       },
       environments: {
@@ -57,5 +65,10 @@ describe('spec.js', function () {
     request = spec.make('foo')
     expect(request.getMethod()).to.equal('GET')
     expect(request.getUri().toString()).to.equal('https://live.com/products')
+
+    spec.set('env', 'prod')
+    request = spec.make('baz')
+    expect(request.getMethod()).to.equal('POST')
+    expect(request.getUri().toString()).to.equal('https://live.com/products?a=x')
   })
 })
