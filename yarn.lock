@@ -759,7 +759,7 @@ cli-boxes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/cli-boxes/-/cli-boxes-1.0.0.tgz#4fa917c3e59c94a004cd61f8ee509da651687143"
 
-cli-color@^1.1.0:
+cli-color@^1.1.0, cli-color@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/cli-color/-/cli-color-1.2.0.tgz#3a5ae74fd76b6267af666e69e2afbbd01def34d1"
   dependencies:
@@ -2119,12 +2119,14 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
 lapi-common@^1.0.x:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/lapi-common/-/lapi-common-1.0.3.tgz#fd21a212141e29443d6830b8eb8fc423f919673d"
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/lapi-common/-/lapi-common-1.0.4.tgz#7224df2152e9179672968e3f95fd59e57623d685"
+  dependencies:
+    cli-color "^1.2.0"
 
 lapi-dev@^1.0.x:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/lapi-dev/-/lapi-dev-1.0.5.tgz#07c642906e19d7d571af03d84f89bc0597d3c2fd"
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/lapi-dev/-/lapi-dev-1.0.6.tgz#3acd68c6e481c58b3818e6daa0eba0180f63e0ec"
   dependencies:
     babel-preset-es2015 "^6.9.0"
     chai "^3.5.0"
@@ -2137,8 +2139,8 @@ lapi-dev@^1.0.x:
     gulp-nodemon "^2.1.0"
 
 lapi-http@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/lapi-http/-/lapi-http-1.0.2.tgz#b619d358144db1daf31b0cdc18fdb0f867f99936"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/lapi-http/-/lapi-http-1.0.3.tgz#57674a655c916e7d37b14baac3399df19bc0f4fc"
   dependencies:
     lapi-common "^1.0.x"
 
