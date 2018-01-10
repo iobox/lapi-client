@@ -1,4 +1,4 @@
-let $module = {
+let IDFWGJyrqLumcNit = {
  "Auth": "auth.js",
  "Client": "client.js",
  "helper": {
@@ -18,4 +18,4 @@ const publish = function ($object) {
   
   return $object;
 };
-module.exports = publish($module);
+module.exports = publish(IDFWGJyrqLumcNit);
