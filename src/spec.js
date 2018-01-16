@@ -134,7 +134,7 @@ export default class Spec {
     if (typeof endpoint['middlewares'] !== 'undefined' && Array.isArray(endpoint['middlewares'])) {
       endpoint['middlewares'].forEach(key => {
         if (typeof this.data.middlewares[key] !== 'undefined') {
-          this.data.middlewares[key](request, parameters)
+          [request, parameters] = this.data.middlewares[key](request, parameters)
         }
       })
     }

@@ -60,8 +60,9 @@ describe('spec.js', function () {
         }
       },
       middlewares: {
-        'auth': function(request) {
+        'auth': function(request, parameters) {
           request.set('some-attr', 'some-value')
+          return [request, parameters]
         }
       }
     })
