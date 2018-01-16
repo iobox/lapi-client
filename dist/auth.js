@@ -57,6 +57,30 @@ var authBasic = function () {
   return authBasic;
 }();
 
+var authBearer = function () {
+  function authBearer() {
+    _classCallCheck(this, authBearer);
+  }
+
+  _createClass(authBearer, [{
+    key: 'authorize',
+
+    /**
+     *
+     * @param {Request} request
+     * @param parameters
+     * @returns {authBearer}
+     */
+    value: function authorize(request, parameters) {
+      var bearer = _replacer2.default.replace('{{bearer_token}}', parameters);
+      request.getHeader().set('Authorization', 'Bearer ' + bearer);
+      return this;
+    }
+  }]);
+
+  return authBearer;
+}();
+
 /**
  * Authorization Extension
  *
@@ -78,6 +102,9 @@ var Auth = function () {
     switch (type) {
       case Auth.TYPE_BASIC:
         this.adapter = new authBasic();
+        break;
+      case Auth.TYPE_BEARER:
+        this.adapter = new authBearer();
         break;
       default:
         this.adapter = new authNone();
@@ -107,3 +134,4 @@ exports.default = Auth;
 
 Auth.TYPE_NONE = '';
 Auth.TYPE_BASIC = 'basic';
+Auth.TYPE_BEARER = 'bearer';

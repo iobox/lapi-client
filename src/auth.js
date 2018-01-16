@@ -23,6 +23,20 @@ class authBasic {
   }
 }
 
+class authBearer {
+  /**
+   *
+   * @param {Request} request
+   * @param parameters
+   * @returns {authBearer}
+   */
+  authorize(request, parameters) {
+    const bearer = Replacer.replace('{{bearer_token}}', parameters)
+    request.getHeader().set('Authorization', 'Bearer ' + bearer)
+    return this
+  }
+}
+
 /**
  * Authorization Extension
  *
@@ -38,6 +52,9 @@ export default class Auth {
     switch (type) {
       case Auth.TYPE_BASIC:
         this.adapter = new authBasic()
+        break
+      case Auth.TYPE_BEARER:
+        this.adapter = new authBearer()
         break
       default:
         this.adapter = new authNone()
@@ -57,3 +74,4 @@ export default class Auth {
 }
 Auth.TYPE_NONE = ''
 Auth.TYPE_BASIC = 'basic'
+Auth.TYPE_BEARER = 'bearer'

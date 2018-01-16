@@ -25,4 +25,15 @@ describe('helper/replacer.js', function () {
     expect(request.getHeader().has('Authorization')).to.be.true
     expect(request.getHeader().get('Authorization')).to.equal('Basic ' + (new Buffer('john:dummy')).toString('base64'))
   })
+
+  /** @test {Auth#authorize} */
+  it('[authorize][bearer] should authorize request', () => {
+    const request = new Request()
+    const auth = new Auth(Auth.TYPE_BEARER)
+    auth.authorize(request, {
+      'bearer_token': 'some_token'
+    })
+    expect(request.getHeader().has('Authorization')).to.be.true
+    expect(request.getHeader().get('Authorization')).to.equal('Bearer some_token')
+  })
 })
