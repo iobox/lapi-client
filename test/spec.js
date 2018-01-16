@@ -41,6 +41,12 @@ describe('spec.js', function () {
           query: {
             a: 'x'
           }
+        },
+        bar: {
+          uri: '{{scheme}}://{{host}}',
+          path: '/products',
+          method: 'GET',
+          middlewares: ['auth']
         }
       },
       environments: {
@@ -51,6 +57,11 @@ describe('spec.js', function () {
         prod: {
           'scheme': 'https',
           'host': 'live.com'
+        }
+      },
+      middlewares: {
+        'auth': function(request) {
+          request.set('some-attr', 'some-value')
         }
       }
     })
@@ -70,5 +81,11 @@ describe('spec.js', function () {
     request = spec.make('baz')
     expect(request.getMethod()).to.equal('POST')
     expect(request.getUri().toString()).to.equal('https://live.com/products?a=x')
+
+    spec.set('env', 'prod')
+    request = spec.make('bar')
+    expect(request.getMethod()).to.equal('GET')
+    expect(request.getUri().toString()).to.equal('https://live.com/products')
+    expect(request.get('some-attr')).to.equal('some-value')
   })
 })

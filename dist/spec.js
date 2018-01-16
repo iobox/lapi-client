@@ -31,6 +31,7 @@ var Spec = function () {
     this.data = {
       endpoints: {},
       environments: {},
+      middlewares: {},
       settings: {}
     };
 
@@ -39,6 +40,9 @@ var Spec = function () {
     }
     if (typeof data['environments'] !== 'undefined') {
       this.register('environments', data['environments']);
+    }
+    if (typeof data['middlewares'] !== 'undefined') {
+      this.register('middlewares', data['middlewares']);
     }
   }
 
@@ -74,6 +78,14 @@ var Spec = function () {
         case 'environments':
           Object.keys(args[0]).forEach(function (key) {
             return _this.register('environment', key, args[0][key]);
+          });
+          break;
+        case 'middleware':
+          this.data.middlewares[args[0]] = args[1];
+          break;
+        case 'middlewares':
+          Object.keys(args[0]).forEach(function (key) {
+            return _this.register('middleware', key, args[0][key]);
           });
           break;
         default:
@@ -162,6 +174,8 @@ var Spec = function () {
   }, {
     key: 'make',
     value: function make(name) {
+      var _this3 = this;
+
       if (typeof this.data.endpoints[name] === 'undefined') {
         return new Error('Endpoint "' + name + '" could not be found');
       }
@@ -171,6 +185,7 @@ var Spec = function () {
           parameters = void 0,
           uri = void 0;
       var endpoint = this.data.endpoints[name];
+
       if (typeof endpoint['auth'] !== 'undefined') {
         auth = new _auth2.default(endpoint['auth']);
       } else if (this.get('auth', '') !== '') {
@@ -184,6 +199,14 @@ var Spec = function () {
         parameters = this.data.environments[env];
       } else {
         parameters = {};
+      }
+
+      if (typeof endpoint['middlewares'] !== 'undefined' && Array.isArray(endpoint['middlewares'])) {
+        endpoint['middlewares'].forEach(function (key) {
+          if (typeof _this3.data.middlewares[key] !== 'undefined') {
+            _this3.data.middlewares[key](request, parameters);
+          }
+        });
       }
       auth.authorize(request, parameters);
 

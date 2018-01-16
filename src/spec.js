@@ -7,6 +7,7 @@ export default class Spec {
     this.data = {
       endpoints: {},
       environments: {},
+      middlewares: {},
       settings: {}
     }
 
@@ -15,6 +16,9 @@ export default class Spec {
     }
     if (typeof data['environments'] !== 'undefined') {
       this.register('environments', data['environments'])
+    }
+    if (typeof data['middlewares'] !== 'undefined') {
+      this.register('middlewares', data['middlewares'])
     }
   }
 
@@ -37,6 +41,12 @@ export default class Spec {
         break
       case 'environments':
         Object.keys(args[0]).forEach(key => this.register('environment', key, args[0][key]))
+        break
+      case 'middleware':
+        this.data.middlewares[args[0]] = args[1]
+        break
+      case 'middlewares':
+        Object.keys(args[0]).forEach(key => this.register('middleware', key, args[0][key]))
         break
       default:
         break
@@ -105,6 +115,7 @@ export default class Spec {
     let request = new Request()
     let auth, parameters, uri
     const endpoint = this.data.endpoints[name]
+
     if (typeof endpoint['auth'] !== 'undefined') {
       auth = new Auth(endpoint['auth'])
     } else if (this.get('auth', '') !== '') {
@@ -118,6 +129,14 @@ export default class Spec {
       parameters = this.data.environments[env]
     } else {
       parameters = {}
+    }
+
+    if (typeof endpoint['middlewares'] !== 'undefined' && Array.isArray(endpoint['middlewares'])) {
+      endpoint['middlewares'].forEach(key => {
+        if (typeof this.data.middlewares[key] !== 'undefined') {
+          this.data.middlewares[key](request, parameters)
+        }
+      })
     }
     auth.authorize(request, parameters)
 
