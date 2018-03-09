@@ -47,6 +47,14 @@ describe('spec.js', function () {
           path: '/products',
           method: 'GET',
           middlewares: ['auth']
+        },
+        test_1: {
+          path: '/products/{{product_id}}',
+          method: 'GET',
+          parameters: {
+            product_id: 999,
+            service: 'my-service'
+          }
         }
       },
       environments: {
@@ -88,5 +96,10 @@ describe('spec.js', function () {
     expect(request.getMethod()).to.equal('GET')
     expect(request.getUri().toString()).to.equal('https://live.com/products')
     expect(request.get('some-attr')).to.equal('some-value')
+
+    spec.set('uri', 'http://api/{{service}}')
+    spec.set('env', 'prod')
+    request = spec.make('test_1')
+    expect(request.getUri().toString()).to.equal('http://api/my-service/products/999')
   })
 })

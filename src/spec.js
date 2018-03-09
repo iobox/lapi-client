@@ -130,6 +130,9 @@ export default class Spec {
     } else {
       parameters = {}
     }
+    if (typeof endpoint['parameters'] === 'object') {
+      parameters = Object.assign(parameters, endpoint['parameters'])
+    }
 
     if (typeof endpoint['middlewares'] !== 'undefined' && Array.isArray(endpoint['middlewares'])) {
       endpoint['middlewares'].forEach(key => {
