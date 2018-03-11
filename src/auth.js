@@ -76,6 +76,6 @@ export default class Auth {
     return this.adapter.authorize(request, parameters)
   }
 }
-Auth.TYPE_NONE = ''
+Auth.TYPE_NONE = false
 Auth.TYPE_BASIC = 'basic'
 Auth.TYPE_BEARER = 'bearer'

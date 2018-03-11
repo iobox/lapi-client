@@ -209,11 +209,22 @@ var Spec = function () {
             parameters = _data$middlewares$key2[1];
           }
         });
+      } else if (this.get('middlewares') !== null) {
+        this.get('middlewares').forEach(function (key) {
+          if (typeof _this3.data.middlewares[key] !== 'undefined') {
+            var _data$middlewares$key3 = _this3.data.middlewares[key](request, parameters);
+
+            var _data$middlewares$key4 = _slicedToArray(_data$middlewares$key3, 2);
+
+            request = _data$middlewares$key4[0];
+            parameters = _data$middlewares$key4[1];
+          }
+        });
       }
 
       if (typeof endpoint['auth'] !== 'undefined') {
         auth = new _auth2.default(endpoint['auth']);
-      } else if (this.get('auth', '') !== '') {
+      } else if (this.get('auth', false) !== false) {
         auth = new _auth2.default(this.get('auth'));
       } else if (parameters['auth'] !== 'undefined') {
         auth = new _auth2.default(parameters['auth']);

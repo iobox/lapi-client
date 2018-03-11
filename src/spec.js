@@ -132,11 +132,17 @@ export default class Spec {
           [request, parameters] = this.data.middlewares[key](request, parameters)
         }
       })
+    } else if (this.get('middlewares') !== null) {
+      this.get('middlewares').forEach(key => {
+        if (typeof this.data.middlewares[key] !== 'undefined') {
+          [request, parameters] = this.data.middlewares[key](request, parameters)
+        }
+      })
     }
 
     if (typeof endpoint['auth'] !== 'undefined') {
       auth = new Auth(endpoint['auth'])
-    } else if (this.get('auth', '') !== '') {
+    } else if (this.get('auth', false) !== false) {
       auth = new Auth(this.get('auth'))
     } else if (parameters['auth'] !== 'undefined') {
       auth = new Auth(parameters['auth']);

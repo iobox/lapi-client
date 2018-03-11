@@ -136,6 +136,6 @@ var Auth = function () {
 
 exports.default = Auth;
 
-Auth.TYPE_NONE = '';
+Auth.TYPE_NONE = false;
 Auth.TYPE_BASIC = 'basic';
 Auth.TYPE_BEARER = 'bearer';
