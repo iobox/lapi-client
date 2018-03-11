@@ -116,14 +116,6 @@ export default class Spec {
     let auth, parameters, uri
     const endpoint = this.data.endpoints[name]
 
-    if (typeof endpoint['auth'] !== 'undefined') {
-      auth = new Auth(endpoint['auth'])
-    } else if (this.get('auth', '') !== '') {
-      auth = new Auth(this.get('auth'))
-    } else {
-      auth = new Auth()
-    }
-
     const env = this.get('env', '')
     if (env !== '' && typeof this.data.environments[env] !== 'undefined') {
       parameters = this.data.environments[env]
@@ -140,6 +132,16 @@ export default class Spec {
           [request, parameters] = this.data.middlewares[key](request, parameters)
         }
       })
+    }
+
+    if (typeof endpoint['auth'] !== 'undefined') {
+      auth = new Auth(endpoint['auth'])
+    } else if (this.get('auth', '') !== '') {
+      auth = new Auth(this.get('auth'))
+    } else if (parameters['auth'] !== 'undefined') {
+      auth = new Auth(parameters['auth']);
+    } else {
+      auth = new Auth()
     }
     auth.authorize(request, parameters)
 

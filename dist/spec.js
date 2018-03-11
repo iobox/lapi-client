@@ -188,14 +188,6 @@ var Spec = function () {
           uri = void 0;
       var endpoint = this.data.endpoints[name];
 
-      if (typeof endpoint['auth'] !== 'undefined') {
-        auth = new _auth2.default(endpoint['auth']);
-      } else if (this.get('auth', '') !== '') {
-        auth = new _auth2.default(this.get('auth'));
-      } else {
-        auth = new _auth2.default();
-      }
-
       var env = this.get('env', '');
       if (env !== '' && typeof this.data.environments[env] !== 'undefined') {
         parameters = this.data.environments[env];
@@ -217,6 +209,16 @@ var Spec = function () {
             parameters = _data$middlewares$key2[1];
           }
         });
+      }
+
+      if (typeof endpoint['auth'] !== 'undefined') {
+        auth = new _auth2.default(endpoint['auth']);
+      } else if (this.get('auth', '') !== '') {
+        auth = new _auth2.default(this.get('auth'));
+      } else if (parameters['auth'] !== 'undefined') {
+        auth = new _auth2.default(parameters['auth']);
+      } else {
+        auth = new _auth2.default();
       }
       auth.authorize(request, parameters);
 

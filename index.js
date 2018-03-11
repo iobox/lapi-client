@@ -1,4 +1,4 @@
-var pERwtZjMOdNRnfTD = {
+var EYAWAjdFSoRsWTBi = {
  "Auth": "auth.js",
  "Client": "client.js",
  "helper": {
@@ -18,4 +18,4 @@ var publish = function ($object) {
   
   return $object;
 };
-module.exports = publish(pERwtZjMOdNRnfTD);
+module.exports = publish(EYAWAjdFSoRsWTBi);
