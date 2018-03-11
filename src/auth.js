@@ -18,7 +18,9 @@ class authBasic {
    */
   authorize(request, parameters) {
     const bearer = (new Buffer(Replacer.replace('{{auth_user}}:{{auth_password}}', parameters))).toString('base64')
-    request.getHeader().set('Authorization', 'Basic ' + bearer)
+    if (bearer !== '') {
+      request.getHeader().set('Authorization', 'Basic ' + bearer)
+    }
     return this
   }
 }
@@ -32,7 +34,9 @@ class authBearer {
    */
   authorize(request, parameters) {
     const bearer = Replacer.replace('{{bearer_token}}', parameters)
-    request.getHeader().set('Authorization', 'Bearer ' + bearer)
+    if (bearer !== '') {
+      request.getHeader().set('Authorization', 'Bearer ' + bearer)
+    }
     return this
   }
 }

@@ -49,7 +49,9 @@ var authBasic = function () {
      */
     value: function authorize(request, parameters) {
       var bearer = new _safeBuffer.Buffer(_replacer2.default.replace('{{auth_user}}:{{auth_password}}', parameters)).toString('base64');
-      request.getHeader().set('Authorization', 'Basic ' + bearer);
+      if (bearer !== '') {
+        request.getHeader().set('Authorization', 'Basic ' + bearer);
+      }
       return this;
     }
   }]);
@@ -73,7 +75,9 @@ var authBearer = function () {
      */
     value: function authorize(request, parameters) {
       var bearer = _replacer2.default.replace('{{bearer_token}}', parameters);
-      request.getHeader().set('Authorization', 'Bearer ' + bearer);
+      if (bearer !== '') {
+        request.getHeader().set('Authorization', 'Bearer ' + bearer);
+      }
       return this;
     }
   }]);
