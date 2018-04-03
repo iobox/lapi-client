@@ -178,6 +178,8 @@ var Spec = function () {
     value: function make(name) {
       var _this3 = this;
 
+      var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
       if (typeof this.data.endpoints[name] === 'undefined') {
         return new Error('Endpoint "' + name + '" could not be found');
       }
@@ -197,6 +199,7 @@ var Spec = function () {
       if (_typeof(endpoint['parameters']) === 'object') {
         parameters = Object.assign(parameters, endpoint['parameters']);
       }
+      parameters = Object.assign(parameters, args);
 
       if (typeof endpoint['middlewares'] !== 'undefined' && Array.isArray(endpoint['middlewares'])) {
         endpoint['middlewares'].forEach(function (key) {

@@ -107,7 +107,7 @@ export default class Spec {
    * @param {string} name
    * @returns {Error|Request}
    */
-  make(name) {
+  make(name, args = {}) {
     if (typeof this.data.endpoints[name] === 'undefined') {
       return new Error('Endpoint "' + name + '" could not be found')
     }
@@ -125,6 +125,7 @@ export default class Spec {
     if (typeof endpoint['parameters'] === 'object') {
       parameters = Object.assign(parameters, endpoint['parameters'])
     }
+    parameters = Object.assign(parameters, args)
 
     if (typeof endpoint['middlewares'] !== 'undefined' && Array.isArray(endpoint['middlewares'])) {
       endpoint['middlewares'].forEach(key => {

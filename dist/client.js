@@ -42,7 +42,9 @@ var Client = function () {
   _createClass(Client, [{
     key: 'request',
     value: function request(name, middleware) {
-      var request = this.spec.make(name);
+      var parameters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      var request = this.spec.make(name, parameters);
       if (request instanceof Error) {
         return new Promise(function (resolve, reject) {
           reject(request);

@@ -16,8 +16,8 @@ export default class Client {
    * @param {?function} middleware
    * @returns {AxiosPromise|Promise}
    */
-  request(name, middleware) {
-    let request = this.spec.make(name)
+  request(name, middleware, parameters = {}) {
+    let request = this.spec.make(name, parameters)
     if (request instanceof Error) {
       return new Promise(function(resolve, reject) {
         reject(request)

@@ -55,6 +55,13 @@ describe('spec.js', function () {
             product_id: 999,
             service: 'my-service'
           }
+        },
+        test_2: {
+          path: '/products/{{product_id}}',
+          method: 'GET',
+          parameters: {
+            product_id: 999,
+          }
         }
       },
       environments: {
@@ -101,5 +108,10 @@ describe('spec.js', function () {
     spec.set('env', 'prod')
     request = spec.make('test_1')
     expect(request.getUri().toString()).to.equal('http://api/my-service/products/999')
+
+    spec.set('uri', 'https://live.com')
+    spec.set('env', 'prod')
+    request = spec.make('test_2', {product_id: 9})
+    expect(request.getUri().toString()).to.equal('https://live.com/products/9')
   })
 })
