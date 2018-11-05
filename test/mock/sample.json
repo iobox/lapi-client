@@ -1,4 +1,7 @@
-[
-  { "id": 1, "name": "John" },
-  { "id": 2, "name": "Marry" }
-]
+{
+  "status": 200,
+  "data": [
+    { "id": 1, "name": "John" },
+    { "id": 2, "name": "Marry" }
+  ]
+}

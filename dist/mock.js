@@ -53,10 +53,7 @@ var Mock = function () {
           if (err) {
             reject(err);
           } else {
-            resolve({
-              status: 200,
-              data: JSON.parse(data)
-            });
+            resolve(JSON.parse(data));
           }
         });
       });
