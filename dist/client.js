@@ -10,6 +10,10 @@ var _spec = require('./spec');
 
 var _spec2 = _interopRequireDefault(_spec);
 
+var _mock = require('./mock');
+
+var _mock2 = _interopRequireDefault(_mock);
+
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -35,14 +39,21 @@ var Client = function () {
    * Execute request
    * @param {string} name
    * @param {?function} middleware
+   * @param {?Object} parameters
    * @returns {AxiosPromise|Promise}
    */
 
 
   _createClass(Client, [{
     key: 'request',
-    value: function request(name, middleware) {
+    value: function request(name) {
+      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var parameters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      var mock = this.spec.get('mock');
+      if (mock !== null && mock instanceof _mock2.default) {
+        return mock.execute(name, parameters);
+      }
 
       var request = this.spec.make(name, parameters);
       if (request instanceof Error) {
@@ -52,7 +63,7 @@ var Client = function () {
       }
 
       var options = {};
-      if (typeof middleware === 'function') {
+      if (middleware !== null && typeof middleware === 'function') {
         middleware(request, options);
       }
 

@@ -1,4 +1,6 @@
 import Client from "../src/client"
+import Spec from "../src/spec"
+import Mock from "../src/mock"
 
 var expect = require('chai').expect
 var settle = require('axios')
@@ -40,6 +42,25 @@ describe('client.js', function () {
       expect(response.status).to.equal(200)
       expect(response.data).to.deep.equal({status: true})
       done()
+    }).catch(e => done(e))
+  })
+
+  /** @test {Client#request} */
+  it('[request] should process request from mock', (done) => {
+    const spec = new Spec()
+    spec.set('mock', new Mock({ dir: './test/mock' }))
+    const mockClient = new Client(spec)
+    mockClient.request('sample').then(response => {
+      try {
+        expect(response.status).to.equal(200)
+        expect(response.data).to.deep.equal([
+          {id: 1, name: 'John'},
+          {id: 2, name: 'Marry'}
+        ])
+        done()
+      } catch (e) {
+        done(e)
+      }
     }).catch(e => done(e))
   })
 })

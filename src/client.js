@@ -1,4 +1,5 @@
 import Spec from './spec'
+import Mock from './mock'
 import axios from 'axios'
 
 export default class Client {
@@ -14,9 +15,15 @@ export default class Client {
    * Execute request
    * @param {string} name
    * @param {?function} middleware
+   * @param {?Object} parameters
    * @returns {AxiosPromise|Promise}
    */
-  request(name, middleware, parameters = {}) {
+  request(name, middleware = null, parameters = {}) {
+    const mock = this.spec.get('mock');
+    if (mock !== null && mock instanceof Mock) {
+      return mock.execute(name, parameters)
+    }
+
     let request = this.spec.make(name, parameters)
     if (request instanceof Error) {
       return new Promise(function(resolve, reject) {
@@ -25,7 +32,7 @@ export default class Client {
     }
 
     let options = {}
-    if (typeof middleware === 'function') {
+    if (middleware !== null && typeof middleware === 'function') {
       middleware(request, options)
     }
 

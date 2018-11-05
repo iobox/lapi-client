@@ -1,6 +1,6 @@
 {
   "name": "lapi-client",
-  "version": "1.0.22",
+  "version": "1.1.0",
   "description": "Light API Client",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,11 @@
   "homepage": "https://github.com/iobox/lapi-client#readme",
   "dependencies": {
     "axios": "^0.17.1",
-    "lapi-http": "~1.0.12"
+    "fs": "^0.0.1-security",
+    "lapi-http": "~1.0.12",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "lapi-dev": "^1.0.13"
   }
 }

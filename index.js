@@ -1,9 +1,10 @@
-var cfILatZzegScXIMY = {
+var bqtIIwGGfCmPfisX = {
  "Auth": "auth.js",
  "Client": "client.js",
  "helper": {
   "Replacer": "helper/replacer.js"
  },
+ "Mock": "mock.js",
  "Spec": "spec.js"
 };
 var publish = function ($object) {
@@ -18,4 +19,4 @@ var publish = function ($object) {
   
   return $object;
 };
-module.exports = publish(cfILatZzegScXIMY);
+module.exports = publish(bqtIIwGGfCmPfisX);
